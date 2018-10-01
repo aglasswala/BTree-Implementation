@@ -12,25 +12,26 @@ public class BTree {
 		root = x;
 		h++;
 	}
+	// Currently function does not work, but it's in the works 
+	// public boolean search(Node x, int value) {
+	// 	int i = 0;
+	// 	while (i < x.Entries.size()-1 && value > x.Entries.get(i))
+	// 		i++;
+	// 	if (i < x.Entries.size()-1 && value == x.Entries.get(i))
+	// 		return true;
+	// 	else {
+	// 		if (x.isnewLeaf)
+	// 			return false;
+	// 		else
+	// 			return this.search(x.Children.get(i), value);
+	// 	}
+	// }
 
-	public boolean search(Node x, int value) {
-		int i = 0;
-		while (i < x.Entries.size()-1 && value > x.Entries.get(i))
-			i++;
-		if (i < x.Entries.size()-1 && value == x.Entries.get(i))
-			return true;
-		else {
-			if (x.isnewLeaf)
-				return false;
-			else
-				return this.search(x.Children.get(i), value);
-		}
-	}
 
+	// This function inserts new values in the tree 
 	public void insert(int key) {
 		Node r = root; 
 		if (r.Entries.size() == 2*t-1) {
-//			System.out.println("SPLITTING");
 			Node s = new Node(false);
 			root = s;
 			s.Children.add(0, r);
@@ -40,7 +41,7 @@ public class BTree {
 		} else
 			insertNonfull(r, key);
 	}
-	
+	// This function splits the child if the length > t
 	public void splitChild(Node x, int i){
 		Node z = new Node(true);
 		Node y = x.Children.get(i);
@@ -62,7 +63,7 @@ public class BTree {
 			y.Entries.remove(j);
 
 	}
-
+	// Inserts new value and splits if needed 
 	public void insertNonfull(Node x, int k) {
 		int i = x.Entries.size()-1;
 		if (x.isnewLeaf) {
@@ -82,6 +83,7 @@ public class BTree {
 		}
 	}
 
+	// Need to add print function 
 	public static void main(String[] args) {
 		BTree btree = new BTree();
 
